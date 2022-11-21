@@ -1,14 +1,11 @@
-import { Types } from "mongoose";
+import { Types } from 'mongoose'
 
 interface ICar {
-    _id?: Types.ObjectId;
-    vin: string;
-    registrationNumber: string;
-    make: string;
-    model: string;
-    year: number;
-    visitId?: Types.ObjectId;
-    clientId?: Types.ObjectId; // I assume that the flow for this will be first creating the client and then a car they own
+  _id?: Types.ObjectId
+  vin: string
+  color: string
+  make: string
+  model: string
 }
 
-export default ICar;
+export default ICar
