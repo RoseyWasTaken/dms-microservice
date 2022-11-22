@@ -1,27 +1,19 @@
 import { NextFunction, Request, Response } from 'express'
 import Joi from 'joi'
 
-const chooseKeys = (object: Record<string, any>, keys: string[]): any => {
-  keys.reduce((obj: any, key: string) => {
-    if (object && Object.prototype.hasOwnProperty.call(object, key)) {
-      obj[key] = object[key]
-    }
-    return obj
-  }, {})
-}
-
-export const validate =
-  (schema: Record<string, any>) =>
+export const validation =
+  (schema: Record<string, any>) => // from /car.route.ts - router.post('/createCar', validation(schema))
     (req: Request, _res: Response, next: NextFunction): void => {
-      const validSchema = chooseKeys(schema, ['params', 'query', 'body'])
-      const object = chooseKeys(req, Object.keys(validSchema))
-      const { value, error } = Joi.compile(validSchema)
-        .prefs({ errors: { label: 'key' } })
-        .validate(object)
-
+      const { error, value } = Joi.object(schema)
+        .validate(req.body)
       if (error) {
-        return next(new Error('Bad Request'))
+        return next(new Error('Bad request.'))
       }
-      Object.assign(req, value)
+      req.body = value
       return next()
     }
+
+// trying to make the validation middleware work for me
+// previous implementation actually formatted the input
+// for the time being i would like it to just make sure
+// the input is correct.
