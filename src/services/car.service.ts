@@ -14,6 +14,18 @@ class CarService {
   public getCarById = async (carId: Types.ObjectId): Promise<ICar & Document | null> => {
     return await Car.findById(carId)
   }
+
+  public getCars = async (query: Record<string, any>): Promise<Array<ICar & Document>> => {
+    return await Car.find({ query }).exec()
+  }
+
+  public updateCar = async (query: Record<string, any>, update: Record<string, any>): Promise<ICar & Document | null> => {
+    return await Car.findOneAndUpdate(query, update)
+  }
+
+  public removeCar = async (query: Record<string, any>): Promise<Record <string, any> | null> => {
+    return await Car.deleteOne(query)
+  }
 }
 
 export default CarService
