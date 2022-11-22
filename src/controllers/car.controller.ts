@@ -20,9 +20,10 @@ export const getCars = async (req: Request, res: Response): Promise<void> => {
 }
 
 export const updateCar = async (req: Request, res: Response): Promise<void> => {
-  const car = await carService.updateCar(req.body.query, req.body.update)
+  const car = await carService.updateCar(req.body.query, req.body.color)
   res.send(car)
 }
+
 export const removeCar = async (req: Request, res: Response): Promise<void> => {
   const car = await carService.removeCar(req.body)
   res.send(car)

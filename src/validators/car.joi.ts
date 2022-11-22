@@ -22,17 +22,22 @@ export const getCars: Record<string, any> = {
   year: Joi.number()
 }
 
-export const updateCar: Record<string, any> = {
-  query: {
-    vin: Joi.string(),
-    make: Joi.string()
-  },
-  update: {
-    color: Joi.string()
-  }
+const carUniqueSchema: Record<string, any> = {
+  vin: Joi.string(),
+  _id: Joi.string()
 }
+
+export const UpdateCarsObject = Joi.object({
+  query: Joi.object(carUniqueSchema),
+  color: Joi.string().required()
+})
 
 export const removeCar: Record<string, any> = {
   _id: Joi.string(),
   vin: Joi.string()
 }
+
+export const CreateCarBodyObject = Joi.object(createCarBody)
+export const GetCarByIdObject = Joi.object(getCarById)
+export const GetCarsObject = Joi.object(getCars)
+export const RemoveCarObject = Joi.object(removeCar)

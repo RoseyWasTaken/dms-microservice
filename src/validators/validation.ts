@@ -2,11 +2,9 @@ import { NextFunction, Request, Response } from 'express'
 import Joi from 'joi'
 
 export const validation =
-  (schema: Record<string, any>) => // from /car.route.ts - router.post('/createCar', validation(schema))
+  (schema: Joi.ObjectSchema) => // from /car.route.ts - router.post('/createCar', validation(schema))
     (req: Request, _res: Response, next: NextFunction): void => {
-      const { error, value } = Joi.object(schema)
-        .min(1)
-        .validate(req.body)
+      const { error, value } = schema.min(1).validate(req.body)
       if (error) {
         return next(new Error('Bad request.'))
       }

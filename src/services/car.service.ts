@@ -16,11 +16,11 @@ class CarService {
   }
 
   public getCars = async (query: Record<string, any>): Promise<Array<ICar & Document>> => {
-    return await Car.find({ query }).exec()
+    return await Car.find(query)
   }
 
-  public updateCar = async (query: Record<string, any>, update: Record<string, any>): Promise<ICar & Document | null> => {
-    return await Car.findOneAndUpdate(query, update)
+  public updateCar = async (query: Record<string, any>, update: string): Promise<ICar & Document | null> => {
+    return await Car.findOneAndUpdate(query, { color: update }, { new: true })
   }
 
   public removeCar = async (query: Record<string, any>): Promise<Record <string, any> | null> => {

@@ -6,7 +6,7 @@ import app from './app.js'
 
 mongoose.connect('mongodb://root:example@192.168.1.18:2717/', (err) => {
   app.listen('3000', () => console.log('Listening on port 3000'))
-  if (err != null) {
+  if (err) {
     throw new Error('Uh-oh, cannot connect to database... UwU')
   }
 })
