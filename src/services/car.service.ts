@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 import { Document, Types } from 'mongoose'
-import ICar from '../interfaces/car.Interface.js'
-import { Car } from '../models/models.js'
+import ICar from '../interfaces/car.Interface'
+import { Car } from '../models/models'
 
 class CarService {
   constructor () {

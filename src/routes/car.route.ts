@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import { carController } from '../controllers/index.js'
-import { CreateCarBodyObject, GetCarByIdObject, GetCarsObject, RemoveCarObject, UpdateCarsObject } from '../validators/car.joi.js'
-import { validation } from '../validators/validation.js'
+import { carController } from '../controllers/index'
+import { CreateCarBodyObject, GetCarByIdObject, GetCarsObject, RemoveCarObject, UpdateCarsObject } from '../validators/car.joi'
+import { validation } from '../validators/validation'
 
 const router: Router = Router()
 

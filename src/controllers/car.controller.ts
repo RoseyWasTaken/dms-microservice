@@ -1,6 +1,6 @@
 import { Request, Response } from 'express' // I've ???extended??? the Request class in d.ts
 import httpStatus from 'http-status'
-import CarService from '../services/car.service.js'
+import CarService from '../services/car.service'
 
 const carService = new CarService()
 

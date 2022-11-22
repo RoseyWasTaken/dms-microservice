@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import ICar from '../interfaces/car.Interface.js'
+import ICar from '../interfaces/car.Interface'
 
 export const createCarBody: Record<keyof ICar, any> = {
   _id: Joi.string(),
