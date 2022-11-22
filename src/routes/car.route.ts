@@ -1,9 +1,10 @@
 import { Router } from 'express'
-import { carController } from 'src/controllers'
-import { validate } from 'src/validators/validation'
+import { carController } from '../controllers/index.js'
+import * as carValidator from '../validators/car.validator.js'
+import { validate } from '../validators/validation.js'
 
-const router = Router()
+const router: Router = Router()
 
-router.post('/createCar/', [validate(carValidator.createUser)], carController.createCar)
+router.post('/createCar', validate(carValidator.createCar), carController.createCar)
 
 export default router

@@ -1,3 +1,3 @@
-import * as carController from './car.controller'
+import * as carController from './car.controller.js'
 
 export { carController }

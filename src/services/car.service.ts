@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 import { Document, Types } from 'mongoose'
-import ICar from '../interfaces/car.Interface'
-import { Car } from '../models/models'
+import ICar from '../interfaces/car.Interface.js'
+import { Car } from '../models/models.js'
 
 class CarService {
   constructor () {
@@ -13,16 +13,6 @@ class CarService {
 
   public getCarById = async (carId: Types.ObjectId): Promise<ICar & Document | null> => {
     return await Car.findById(carId)
-  }
-
-  public updateCarColor = async (color: string, carId: Types.ObjectId): Promise<ICar | null> => {
-    const car = await this.getCarById(carId)
-    if (!car) {
-      throw new Error(`Car of ${carId.toString()} id does not exist.`)
-    }
-    car.color = color
-    await car.save()
-    return car
   }
 }
 
