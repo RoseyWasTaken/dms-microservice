@@ -1,8 +1,9 @@
 import Joi from 'joi'
+import { join } from 'path'
 import ICar from '../interfaces/car.Interface'
 
 export const createCarBody: Record<keyof ICar, any> = {
-  _id: Joi.string(),
+  _id: Joi.string().hex().length(24),
   vin: Joi.string().required(),
   make: Joi.string().required(),
   model: Joi.string().required(),
@@ -11,7 +12,7 @@ export const createCarBody: Record<keyof ICar, any> = {
 }
 
 export const getCarById: Record<string, any> = {
-  _id: Joi.string()
+  _id: Joi.string().hex().length(24),
 }
 
 export const getCars: Record<string, any> = {
@@ -24,7 +25,7 @@ export const getCars: Record<string, any> = {
 
 const carUniqueSchema: Record<string, any> = {
   vin: Joi.string(),
-  _id: Joi.string()
+  _id: Joi.string().hex().length(24)
 }
 
 export const UpdateCarsObject = Joi.object({
@@ -33,7 +34,7 @@ export const UpdateCarsObject = Joi.object({
 })
 
 export const removeCar: Record<string, any> = {
-  _id: Joi.string(),
+  _id: Joi.string().hex().length(24),
   vin: Joi.string()
 }
 
