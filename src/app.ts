@@ -1,5 +1,5 @@
 import express, { Express } from 'express'
-import router from './routes/car.route'
+import router from './routes'
 import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
 dotenv.config()

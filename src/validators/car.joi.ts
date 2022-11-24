@@ -1,21 +1,7 @@
 import Joi from 'joi'
-import { join } from 'path'
-import ICar from '../interfaces/car.Interface'
+import { ICar, IuniqueCar, IchangeColor } from '../interfaces/car.Interface'
 
-export const createCarBody: Record<keyof ICar, any> = {
-  _id: Joi.string().hex().length(24),
-  vin: Joi.string().required(),
-  make: Joi.string().required(),
-  model: Joi.string().required(),
-  color: Joi.string().required(),
-  year: Joi.number().required()
-}
-
-export const getCarById: Record<string, any> = {
-  _id: Joi.string().hex().length(24),
-}
-
-export const getCars: Record<string, any> = {
+const createCarBody: ICar = {
   vin: Joi.string(),
   make: Joi.string(),
   model: Joi.string(),
@@ -23,22 +9,23 @@ export const getCars: Record<string, any> = {
   year: Joi.number()
 }
 
-const carUniqueSchema: Record<string, any> = {
-  vin: Joi.string(),
-  _id: Joi.string().hex().length(24)
+const getCarById: Record<string, Joi.StringSchema> = {
+  _id: Joi.string().hex().length(24).required()
 }
 
-export const UpdateCarsObject = Joi.object({
-  query: Joi.object(carUniqueSchema),
-  color: Joi.string().required()
-})
-
-export const removeCar: Record<string, any> = {
+const carUniqueSchema: Record<keyof IuniqueCar, any> = {
   _id: Joi.string().hex().length(24),
   vin: Joi.string()
 }
 
-export const CreateCarBodyObject = Joi.object(createCarBody)
+const changeColor: Record<keyof IchangeColor, any> = {
+  _id: Joi.string().hex().length(24),
+  vin: Joi.string(),
+  color: Joi.string().required()
+}
+
+export const CreateCarBodyObject = Joi.object(createCarBody).fork(Object.keys(createCarBody), (schema) => schema.required())
 export const GetCarByIdObject = Joi.object(getCarById)
-export const GetCarsObject = Joi.object(getCars)
-export const RemoveCarObject = Joi.object(removeCar)
+export const GetCarsObject = Joi.object(createCarBody)
+export const RemoveCarObject = Joi.object(carUniqueSchema).min(1)
+export const ChangeColorObject = Joi.object(changeColor).min(2)

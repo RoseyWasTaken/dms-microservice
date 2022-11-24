@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-useless-constructor */
-import { Document, Types } from 'mongoose'
-import ICar from '../interfaces/car.Interface'
+import { Types } from 'mongoose'
+import { ICar, ICarDoc } from '../interfaces/car.Interface'
 import { Car } from '../models/models'
 
 class CarService {
@@ -11,15 +11,15 @@ class CarService {
     return await Car.create(car)
   }
 
-  public getCarById = async (carId: Types.ObjectId): Promise<ICar & Document | null> => {
+  public getCarById = async (carId: Types.ObjectId): Promise<ICarDoc | null> => {
     return await Car.findById(carId)
   }
 
-  public getCars = async (query: Record<string, any>): Promise<Array<ICar & Document>> => {
+  public getCars = async (query: Record<string, any>): Promise<ICarDoc[]> => {
     return await Car.find(query)
   }
 
-  public updateCar = async (query: Record<string, any>, update: string): Promise<ICar & Document | null> => {
+  public updateCar = async (query: Record<string, any>, update: string): Promise<ICarDoc | null> => {
     return await Car.findOneAndUpdate(query, { color: update }, { new: true })
   }
 
