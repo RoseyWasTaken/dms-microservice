@@ -12,13 +12,13 @@ interface ICar {
 
 interface ICarDoc extends Document {}
 
-interface IuniqueCar {
+interface IUniqueCar {
   vin: Joi.StringSchema
   _id: Types.ObjectId
 }
 
-interface IchangeColor extends IuniqueCar {
+interface IChangeColor extends IUniqueCar {
   color: Joi.StringSchema
 }
 
-export { ICar, IuniqueCar, IchangeColor, ICarDoc }
+export { ICar, IUniqueCar, IChangeColor, ICarDoc }

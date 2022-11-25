@@ -1,12 +1,17 @@
-import { Request, Response } from 'express' // I've ???extended??? the Request class in d.ts
+import { Request, Response } from 'express'
 import httpStatus from 'http-status'
 import CarService from '../services/car.service'
 
 const carService = new CarService()
 
 export const createCar = async (req: Request, res: Response): Promise<void> => {
-  const car = await carService.createCar(req.body)
-  res.status(httpStatus.CREATED).send(car)
+  try {
+    const car = await carService.createCar(req.body)
+    res.status(httpStatus.CREATED).send(car)
+  } catch (err) {
+    console.log(typeof err)
+    throw new Error('Car already exists')
+  }
 }
 
 export const getCarById = async (req: Request, res: Response): Promise<void> => {

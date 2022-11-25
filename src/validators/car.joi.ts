@@ -1,5 +1,5 @@
 import Joi from 'joi'
-import { ICar, IuniqueCar, IchangeColor } from '../interfaces/car.Interface'
+import { ICar, IUniqueCar, IChangeColor } from '../interfaces/car.Interface'
 
 const createCarBody: ICar = {
   vin: Joi.string(),
@@ -13,12 +13,12 @@ const getCarById: Record<string, Joi.StringSchema> = {
   _id: Joi.string().hex().length(24).required()
 }
 
-const carUniqueSchema: Record<keyof IuniqueCar, any> = {
+const carUniqueSchema: Record<keyof IUniqueCar, any> = {
   _id: Joi.string().hex().length(24),
   vin: Joi.string()
 }
 
-const changeColor: Record<keyof IchangeColor, any> = {
+const changeColor: Record<keyof IChangeColor, any> = {
   _id: Joi.string().hex().length(24),
   vin: Joi.string(),
   color: Joi.string().required()

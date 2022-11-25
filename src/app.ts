@@ -2,6 +2,7 @@ import express, { Express } from 'express'
 import router from './routes'
 import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
+import { errorHandler } from './error/errorHandler'
 dotenv.config()
 
 const app: Express = express()
@@ -9,6 +10,8 @@ const app: Express = express()
 app.use(express.json())
 
 app.use('/', router)
+
+app.use(errorHandler)
 
 export default app
 
