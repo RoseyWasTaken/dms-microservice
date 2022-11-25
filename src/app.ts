@@ -1,4 +1,4 @@
-import express, { Express } from 'express'
+import express, { Response, Request, NextFunction, Express } from 'express'
 import router from './routes'
 import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
@@ -8,10 +8,13 @@ dotenv.config()
 const app: Express = express()
 
 app.use(express.json())
-
 app.use('/', router)
-
-app.use(errorHandler)
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  if (err) {
+    errorHandler(err, res)
+  }
+  next()
+})
 
 export default app
 

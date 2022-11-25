@@ -1,24 +1,24 @@
-import Joi from 'joi'
 import { Types, Document } from 'mongoose'
 
 interface ICar {
   _id?: Types.ObjectId
-  vin: Joi.StringSchema
-  make: Joi.StringSchema
-  model: Joi.StringSchema
-  color: Joi.StringSchema
-  year: Joi.NumberSchema
+  vin: string
+  make: string
+  model: string
+  color: string
+  year: number
+}
+
+interface IRequest<T> extends Express.Request {
+  body: T
 }
 
 interface ICarDoc extends Document {}
 
-interface IUniqueCar {
-  vin: Joi.StringSchema
+type IUniqueCar = { // provide at least one
   _id: Types.ObjectId
+} | {
+  vin: string
 }
 
-interface IChangeColor extends IUniqueCar {
-  color: Joi.StringSchema
-}
-
-export { ICar, IUniqueCar, IChangeColor, ICarDoc }
+export { ICar, IUniqueCar, ICarDoc, IRequest }

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 import { Types } from 'mongoose'
-import { ICar, ICarDoc } from '../interfaces/car.Interface'
+import { ApiError } from '../error/errors'
+import { ICar, ICarDoc, IUniqueCar } from '../interfaces/car.Interface'
 import { Car } from '../models/models'
 
 class CarService {
@@ -15,16 +16,21 @@ class CarService {
     return await Car.findById(carId)
   }
 
-  public getCars = async (query: Record<string, any>): Promise<ICarDoc[]> => {
+  public getCars = async (query: Partial<ICar>): Promise<ICarDoc[] | null> => {
     return await Car.find(query)
   }
 
-  public updateCar = async (query: Record<string, any>, update: string): Promise<ICarDoc | null> => {
+  public changeColor = async (query: IUniqueCar, update: string): Promise<ICarDoc | null> => {
     return await Car.findOneAndUpdate(query, { color: update }, { new: true })
   }
 
-  public removeCar = async (query: Record<string, any>): Promise<Record <string, any> | null> => {
-    return await Car.deleteOne(query)
+  public removeCar = async (query: IUniqueCar): Promise<void> => {
+    const deletionResult = await Car.deleteOne(query)
+    if (deletionResult.deletedCount === 0) {
+      throw new ApiError('Not found', 404)
+    } else {
+      return
+    }
   }
 }
 

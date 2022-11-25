@@ -1,3 +1,7 @@
-export const errorHandler = (err: any, req: any, res: any, next: any): any => {
-  res.status(500).send(err)
+import { Response } from 'express'
+
+export const errorHandler = (err: any, res: Response): void => {
+  const statusCode = err.statusCode ? err.statusCode : 500
+  res.status(statusCode)
+  res.send(err.message)
 }

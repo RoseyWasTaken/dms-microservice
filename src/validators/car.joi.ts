@@ -1,26 +1,26 @@
 import Joi from 'joi'
-import { ICar, IUniqueCar, IChangeColor } from '../interfaces/car.Interface'
 
-const createCarBody: ICar = {
-  vin: Joi.string(),
+const vinReg = /[A-HJ-NPR-Z0-9]{17}/
+
+const createCarBody = {
+  vin: Joi.string().pattern(vinReg),
   make: Joi.string(),
   model: Joi.string(),
   color: Joi.string(),
   year: Joi.number()
 }
 
-const getCarById: Record<string, Joi.StringSchema> = {
+const getCarById = {
   _id: Joi.string().hex().length(24).required()
 }
 
-const carUniqueSchema: Record<keyof IUniqueCar, any> = {
+const carUniqueSchema = {
   _id: Joi.string().hex().length(24),
-  vin: Joi.string()
+  vin: Joi.string().pattern(vinReg)
 }
 
-const changeColor: Record<keyof IChangeColor, any> = {
-  _id: Joi.string().hex().length(24),
-  vin: Joi.string(),
+const changeColor = {
+  query: Joi.object(carUniqueSchema).required(),
   color: Joi.string().required()
 }
 
@@ -28,4 +28,4 @@ export const CreateCarBodyObject = Joi.object(createCarBody).fork(Object.keys(cr
 export const GetCarByIdObject = Joi.object(getCarById)
 export const GetCarsObject = Joi.object(createCarBody)
 export const RemoveCarObject = Joi.object(carUniqueSchema).min(1)
-export const ChangeColorObject = Joi.object(changeColor).min(2)
+export const ChangeColorObject = Joi.object(changeColor)
