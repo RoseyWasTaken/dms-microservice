@@ -15,10 +15,4 @@ interface IRequest<T> extends Express.Request {
 
 interface ICarDoc extends Document {}
 
-type IUniqueCar = { // provide at least one
-  _id: Types.ObjectId
-} | {
-  vin: string
-}
-
-export { ICar, IUniqueCar, ICarDoc, IRequest }
+export { ICar, ICarDoc, IRequest }
