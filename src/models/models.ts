@@ -1,7 +1,15 @@
-import mongoose from 'mongoose'
+import mongoose, { Types } from 'mongoose'
 import carSchema from './schemas/car.schema'
-import { ICar } from '../interfaces/car.Interface'
 
-const Car = mongoose.model<ICar>('Car', carSchema)
+interface CarMod {
+  _id?: Types.ObjectId
+  vin: string
+  make: string
+  model: string
+  color: string
+  year: number
+}
+
+const Car = mongoose.model<CarMod>('Car', carSchema)
 
 export { Car }
