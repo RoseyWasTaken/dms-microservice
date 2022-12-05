@@ -20,12 +20,12 @@ class CarService {
     return await Car.find(query)
   }
 
-  public changeColor = async (query: ICar['vin'], color: ICar['color']): Promise<ICarDoc | null> => {
-    return await Car.findOneAndUpdate({ query }, { color }, { new: true })
+  public changeColor = async (vin: ICar['vin'], color: ICar['color']): Promise<ICarDoc | null> => {
+    return await Car.findOneAndUpdate({ vin }, { color }, { new: true })
   }
 
-  public removeCar = async (query: ICar['vin']): Promise<void> => {
-    const deletionResult = await Car.deleteOne({ query })
+  public removeCar = async (vin: ICar['vin']): Promise<void> => {
+    const deletionResult = await Car.deleteOne({ vin })
     if (deletionResult.deletedCount === 0) {
       throw new ApiError('Not found', 404)
     } else {

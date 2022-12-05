@@ -43,8 +43,8 @@ export const changeColor = async (req: IRequest<Pick<ICar, 'vin' | 'color'>>, re
 export const removeCar = async (req: IRequest<Pick<ICar, 'vin'>>, res: Response): Promise<void> => {
   try {
     await carService.removeCar(req.body.vin) // if it does not throw an error OG
-    res.status(httpStatus.OK)
+    res.status(httpStatus.OK).send()
   } catch (err) {
-    errorHandler(new ApiError('Not found', 404), res)
+    errorHandler(err, res)
   }
 }

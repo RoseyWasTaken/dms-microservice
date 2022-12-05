@@ -1,5 +1,3 @@
-import { swaggerChangeColorObject, swaggerCreateCarBodyObject, swaggerGetCarByIdObject, swaggerGetCarsObject, swaggerRemoveCarObject } from '../validators/car.joi'
-
 export const swCarRouter = {
   '/cars/createCar': {
     post: {
@@ -9,7 +7,7 @@ export const swCarRouter = {
         content: {
           'application/json': {
             schema: {
-              ...swaggerCreateCarBodyObject
+
             }
           }
         }
@@ -31,9 +29,7 @@ export const swCarRouter = {
       requestBody: {
         content: {
           'application/json': {
-            schema: {
-              ...swaggerGetCarByIdObject
-            }
+            schema: { }
           }
         }
       },
@@ -55,7 +51,6 @@ export const swCarRouter = {
         content: {
           'application/json': {
             schema: {
-              ...swaggerGetCarsObject
             }
           }
         }
@@ -75,7 +70,6 @@ export const swCarRouter = {
         content: {
           'application/json': {
             schema: {
-              ...swaggerChangeColorObject
             }
           }
         }
@@ -98,7 +92,6 @@ export const swCarRouter = {
         content: {
           'application/json': {
             schema: {
-              ...swaggerRemoveCarObject
             }
           }
         }
